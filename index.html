@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>atlrwrks — in fabrication</title>
+<meta name="description" content="atlrwrks is being assembled — fabrication, industrial design, AR/XR, and interactive 3D. Sign up to be notified when the floor is open.">
+<meta property="og:title" content="atlrwrks — in fabrication">
+<meta property="og:description" content="Works & matter. The site is being built. Sign up to know when the floor opens.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://c4205m.github.io/atlrwrks/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="atlrwrks — in fabrication">
+<meta name="twitter:description" content="Works & matter. The site is being built. Sign up to know when the floor opens.">
+<link rel="canonical" href="https://c4205m.github.io/atlrwrks/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1EC;
+  --bone:#E7E2D8;
+  --graphite:#6E6A60;
+  --ink:#16140F;
+  --oxide:#C0353E;
+  --hair:#D6D0C5;
+  --hair-ink:#33302A;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --sans:"Archivo",system-ui,sans-serif;
+  --mx:clamp(20px,4.5vw,64px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+::selection{background:var(--oxide);color:var(--paper)}
+
+/* ---------- shell ---------- */
+.shell{
+  height:100vh;height:100dvh;
+  display:grid;
+  grid-template-rows:auto auto 1fr auto;
+  position:relative;
+  overflow:hidden;
+}
+
+/* faint baseline grid behind everything */
+.shell::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--graphite) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--graphite) 7%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%, 100% 48px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.18) 60%, rgba(0,0,0,.45));
+  z-index:0;
+}
+
+/* ---------- top bar ---------- */
+header.top{
+  position:relative;z-index:5;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;
+  padding:14px var(--mx);
+  border-bottom:1px solid var(--hair);
+  background:var(--paper);
+}
+.wm{font-family:var(--sans);font-weight:600;letter-spacing:-0.03em;line-height:0.9;display:inline-flex;align-items:baseline;white-space:nowrap;color:var(--ink);font-size:18px}
+.wm .dot{display:inline-block;width:0.16em;height:0.16em;border-radius:50%;background:var(--oxide);margin-left:0.05em;flex:none;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 0 color-mix(in srgb, var(--oxide) 60%, transparent)}
+  50%{transform:scale(1.18);box-shadow:0 0 0 6px color-mix(in srgb, var(--oxide) 0%, transparent)}
+}
+
+header.top .crumb{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--graphite);
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+header.top .crumb b{color:var(--ink);font-weight:500}
+header.top .crumb .sep{color:color-mix(in srgb, var(--graphite) 50%, transparent)}
+
+.status{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--graphite);
+  display:flex;align-items:center;gap:10px;
+}
+.status .led{
+  width:7px;height:7px;border-radius:50%;background:var(--oxide);
+  box-shadow:0 0 0 0 var(--oxide);
+  animation:led 1.2s ease-in-out infinite;
+}
+@keyframes led{
+  0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--oxide) 70%, transparent)}
+  60%{box-shadow:0 0 0 8px color-mix(in srgb, var(--oxide) 0%, transparent)}
+}
+
+/* ---------- hazard bars ---------- */
+.hazard{
+  position:relative;z-index:4;height:12px;
+  background:repeating-linear-gradient(135deg,
+    var(--ink) 0 14px,
+    var(--oxide) 14px 28px);
+  background-size:39.6px 39.6px;
+  animation:scroll 1.4s linear infinite;
+  border-bottom:1px solid var(--hair);
+}
+@keyframes scroll{
+  from{background-position:0 0}
+  to{background-position:-39.6px 0}
+}
+
+/* ---------- main ---------- */
+main{
+  position:relative;z-index:3;min-height:0;
+  padding:clamp(20px,3.5vh,48px) var(--mx);
+  display:grid;
+  grid-template-columns: minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:clamp(24px,3.5vw,52px);
+  align-items:stretch;
+  overflow:hidden;
+}
+@media(max-width:880px){
+  main{grid-template-columns:1fr;overflow:auto}
+}
+
+/* LEFT: hero ----------- */
+.hero{
+  display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px);
+  position:relative;min-height:0;justify-content:space-between;
+}
+
+.eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--graphite);
+}
+.eyebrow .pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--oxide);color:var(--oxide);
+  padding:5px 10px;border-radius:2px;
+  font-weight:500;
+}
+.eyebrow .pill::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:var(--oxide);
+  animation:led 1.2s ease-in-out infinite;
+}
+.eyebrow .ln{flex:1;height:1px;background:var(--hair);max-width:160px}
+
+h1.head{
+  font-weight:600;letter-spacing:-0.035em;line-height:0.92;
+  font-size:clamp(44px,10vmin,128px);
+  display:flex;flex-direction:column;align-items:flex-start;gap:0.06em;
+}
+h1.head .row3{display:inline-flex;align-items:flex-end;gap:0.04em;padding-right:0.2em}
+h1.head .word{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:0.92}
+h1.head .word > span{display:inline-block;transform:translateY(105%);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+h1.head .word.w2 > span{animation-delay:.12s}
+h1.head .word.w3 > span{animation-delay:.24s}
+h1.head .dot{
+  display:inline-block;width:0.18em;height:0.18em;border-radius:50%;background:var(--oxide);
+  flex:none;
+  margin-bottom:0.04em;
+  opacity:0;
+  animation:rise-dot .6s cubic-bezier(.2,.7,.2,1) .55s forwards, pulse 1.6s ease-in-out 1.15s infinite;
+}
+@keyframes rise{from{transform:translateY(105%)} to{transform:translateY(0)}}
+@keyframes rise-dot{from{opacity:0;transform:scale(.4)} to{opacity:1;transform:scale(1)}}
+
+.sub{
+  max-width:54ch;color:var(--graphite);
+  font-size:clamp(14.5px,1.25vw,17px);line-height:1.55;
+}
+.sub b{color:var(--ink);font-weight:500}
+
+/* progress strip — indeterminate ----------- */
+.strip{
+  border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:14px 0;
+  display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;
+}
+.strip .lab{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--graphite)}
+.strip .lab b{color:var(--ink);font-weight:500}
+.bar{
+  position:relative;height:10px;background:var(--bone);overflow:hidden;border-radius:1px;
+  background-image:repeating-linear-gradient(135deg,
+    var(--bone) 0 6px,
+    color-mix(in srgb, var(--graphite) 16%, var(--bone)) 6px 12px);
+  background-size:17px 17px;
+  animation:barber 1.2s linear infinite;
+}
+@keyframes barber{from{background-position:0 0} to{background-position:17px 0}}
+.bar .scan{
+  position:absolute;top:0;bottom:0;width:34%;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--oxide) 85%, transparent) 50%, transparent);
+  animation:scan 2.4s cubic-bezier(.5,0,.5,1) infinite;
+}
+@keyframes scan{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(330%)}
+}
+.strip .state{
+  font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--oxide);min-width:120px;text-align:right;
+  display:inline-flex;align-items:center;justify-content:flex-end;gap:8px;
+}
+.strip .state .cursor{display:inline-block;width:0.6ch;background:var(--oxide);color:transparent;animation:blink 1s steps(1) infinite}
+
+/* meta row ----------- */
+.metarow{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-bottom:1px solid var(--hair);
+}
+.metarow .cell{padding:14px 18px 14px 18px;border-left:1px solid var(--hair)}
+.metarow .cell:first-child{border-left:none;padding-left:0}
+.metarow h4{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--graphite);margin-bottom:6px;font-weight:500}
+.metarow p{font-size:13.5px;line-height:1.4}
+.metarow .v{font-family:var(--mono);font-weight:500;color:var(--ink);font-size:13.5px}
+@media(max-width:680px){.metarow{grid-template-columns:repeat(2,1fr)}.metarow .cell:nth-child(3){border-left:none;padding-left:0}}
+
+/* notify form */
+.notify{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.notify .ipt{
+  flex:1;min-width:240px;
+  font-family:var(--mono);font-size:13px;letter-spacing:0.02em;color:var(--ink);
+  background:transparent;border:none;border-bottom:1px solid var(--ink);
+  padding:10px 0;outline:none;
+}
+.notify .ipt::placeholder{color:var(--graphite)}
+.notify .ipt:focus{border-color:var(--oxide)}
+.notify .btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:11px 18px;border-radius:2px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:background .18s, color .18s, border-color .18s;
+}
+.notify .btn:hover{background:var(--oxide);border-color:var(--oxide)}
+.notify .btn .arr{width:14px;height:1px;background:currentColor;position:relative;display:inline-block}
+.notify .btn .arr::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
+
+/* ---------- RIGHT: console ---------- */
+.console{
+  position:relative;
+  display:flex;flex-direction:column;gap:14px;min-height:0;
+}
+
+.scope{
+  position:relative;flex:1;min-height:0;
+  background:var(--ink);
+  color:var(--paper);
+  overflow:hidden;
+  border:1px solid var(--hair-ink);
+}
+
+/* corner ticks */
+.tk{position:absolute;width:11px;height:11px;color:var(--paper);opacity:.7}
+.tk::before,.tk::after{content:"";position:absolute;background:currentColor}
+.tk::before{left:0;top:50%;width:100%;height:1px;transform:translateY(-50%)}
+.tk::after{top:0;left:50%;height:100%;width:1px;transform:translateX(-50%)}
+.tk.tl{left:8px;top:8px}.tk.tr{right:8px;top:8px}
+.tk.bl{left:8px;bottom:8px}.tk.br{right:8px;bottom:8px}
+
+.scope .label{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  color:#8c887e;
+}
+.scope .corner{
+  position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8c887e;
+}
+.scope .corner.tr{top:14px;right:22px;text-align:right}
+.scope .corner.bl{bottom:14px;left:22px}
+.scope .corner.br{bottom:14px;right:22px;text-align:right}
+
+.scope svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.cross{stroke:#4a463d;stroke-width:1}
+
+.scope .hscan{
+  position:absolute;left:0;right:0;height:2px;top:0;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--oxide) 85%, transparent) 50%, transparent);
+  box-shadow:0 0 12px color-mix(in srgb, var(--oxide) 60%, transparent);
+  animation:hscan 4.2s cubic-bezier(.5,0,.5,1) infinite;
+  pointer-events:none;
+}
+@keyframes hscan{
+  0%{top:6%}
+  50%{top:94%}
+  100%{top:6%}
+}
+
+.scope .markblock{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  width:78%;
+}
+.scope .wm-big{
+  font-family:var(--sans);font-weight:600;letter-spacing:-0.03em;line-height:0.9;
+  color:var(--paper);
+  font-size:clamp(22px,3.2vw,38px);
+  display:inline-flex;align-items:baseline;white-space:nowrap;
+}
+.scope .wm-big .dot{
+  display:inline-block;width:0.16em;height:0.16em;border-radius:50%;background:var(--oxide);
+  margin-left:0.05em;animation:pulse 1.6s ease-in-out infinite;
+}
+.scope .underline{
+  height:1px;width:100%;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--paper) 35%, transparent) 50%, transparent);
+}
+.scope .subline{
+  font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8c887e;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.scope .subline .blob{width:4px;height:4px;border-radius:50%;background:var(--oxide);animation:led 1.2s ease-in-out infinite}
+
+/* readout panel */
+.readout{
+  border:1px solid var(--hair);background:var(--paper);
+  padding:12px 14px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.readout .row{
+  display:flex;justify-content:space-between;gap:14px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;
+}
+.readout .k{color:var(--graphite);text-transform:uppercase;letter-spacing:0.14em;font-size:10.5px}
+.readout .v{color:var(--ink);font-weight:500}
+.readout .v.ox{color:var(--oxide)}
+
+.cursor{display:inline-block;width:0.6ch;background:var(--ink);color:transparent;animation:blink 1s steps(1) infinite;margin-left:1px}
+@keyframes blink{50%{background:transparent}}
+
+/* ---------- footer ticker ---------- */
+footer.foot{
+  position:relative;z-index:5;
+  border-top:1px solid var(--hair);
+  background:var(--paper);
+  overflow:hidden;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;
+}
+footer.foot .tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--paper);
+  background:var(--ink);
+  padding:13px 18px;
+  display:flex;align-items:center;gap:10px;
+  white-space:nowrap;
+}
+footer.foot .tag .led{width:6px;height:6px;border-radius:50%;background:var(--oxide);animation:led 1.2s ease-in-out infinite}
+
+.marquee{
+  overflow:hidden;
+  border-left:1px solid var(--hair);border-right:1px solid var(--hair);
+  padding:13px 0;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.marquee .track{
+  display:flex;gap:48px;white-space:nowrap;width:max-content;
+  animation:tic 38s linear infinite;
+  font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--graphite);
+  align-items:center;
+}
+.marquee .track b{color:var(--ink);font-weight:500}
+.marquee .track .sep{color:var(--oxide)}
+@keyframes tic{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+footer.foot .clock{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--graphite);
+  padding:13px 18px;white-space:nowrap;
+}
+footer.foot .clock b{color:var(--ink);font-weight:500}
+
+@media (prefers-reduced-motion: reduce){
+  .hazard, .bar, .bar .scan, .scope .hscan, .marquee .track, h1.head .word > span, h1.head .dot, .wm .dot, .status .led, .eyebrow .pill::before, .cursor, .scope .wm-big .dot, .scope .subline .blob, footer.foot .tag .led{
+    animation:none;
+  }
+  h1.head .word > span{transform:translateY(0)}
+  h1.head .dot{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ top bar ============ -->
+  <header class="top">
+    <a class="wm" href="#"><span>atlrwrks</span><span class="dot"></span></a>
+    <div class="crumb">
+      <span>file</span><span class="sep">/</span>
+      <b>holding-page</b><span class="sep">/</span>
+      <span>no. 047 · rev a</span>
+    </div>
+    <div class="status"><span class="led"></span>at the bench · station 04 · active</div>
+  </header>
+
+  <!-- ============ hazard bar ============ -->
+  <div class="hazard" aria-hidden="true"></div>
+
+  <!-- ============ main ============ -->
+  <main>
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        <span class="pill">in fabrication</span>
+        <span>holding · pre-release</span>
+        <span class="ln"></span>
+      </div>
+
+      <h1 class="head">
+        <span class="word w1"><span>under</span></span>
+        <span class="word w2"><span>construc-</span></span>
+        <span class="row3"><span class="word w3"><span>tion</span></span><span class="dot"></span></span>
+      </h1>
+
+      <p class="sub">
+        The site is being assembled. We're <b>milling the parts, wiring the systems, and pulling cable to the bench.</b> Back online when the work is sturdy enough to ship. Sign your name below and we'll send a single note the moment the floor is open.
+      </p>
+
+      <div class="strip">
+        <span class="lab"><b>build</b> · v1.0 · rev a</span>
+        <div class="bar">
+          <div class="scan"></div>
+        </div>
+        <span class="state">in&nbsp;progress<span class="cursor">_</span></span>
+      </div>
+
+      <div class="metarow">
+        <div class="cell">
+          <h4>discipline</h4>
+          <p>fabrication · ar/xr</p>
+        </div>
+        <div class="cell">
+          <h4>bench / station</h4>
+          <p>the bench · station 04</p>
+        </div>
+        <div class="cell">
+          <h4>operator</h4>
+          <p>j. mercer</p>
+        </div>
+      </div>
+
+      <form class="notify" onsubmit="return handleNotify(event)">
+        <input class="ipt" type="email" placeholder="your.address@domain" required>
+        <button class="btn" type="submit">notify me <span class="arr"></span></button>
+      </form>
+
+    </section>
+
+    <!-- ============ console (decorative) ============ -->
+    <aside class="console" aria-hidden="true">
+
+      <div class="scope">
+        <span class="tk tl"></span><span class="tk tr"></span><span class="tk bl"></span><span class="tk br"></span>
+        <span class="label">/ tracking</span>
+        <span class="corner tr">no. 047<br>rev a</span>
+
+        <svg class="bg" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+          <line class="cross" x1="0" y1="200" x2="400" y2="200"/>
+          <line class="cross" x1="200" y1="0" x2="200" y2="400"/>
+          <line class="cross" x1="40" y1="40" x2="360" y2="360" stroke-dasharray="2 8" opacity=".55"/>
+          <line class="cross" x1="360" y1="40" x2="40" y2="360" stroke-dasharray="2 8" opacity=".55"/>
+          <line class="cross" x1="0" y1="120" x2="400" y2="120" stroke-dasharray="1 6" opacity=".4"/>
+          <line class="cross" x1="0" y1="280" x2="400" y2="280" stroke-dasharray="1 6" opacity=".4"/>
+        </svg>
+
+        <div class="hscan"></div>
+
+        <div class="markblock">
+          <span class="wm-big"><span>atlrwrks</span><span class="dot"></span></span>
+          <div class="underline"></div>
+          <span class="subline"><span class="blob"></span>works &amp; matter</span>
+        </div>
+
+        <span class="corner bl">lat&nbsp;33.7488n<br>lon&nbsp;84.3877w</span>
+        <span class="corner br" id="frame">frm&nbsp;0000</span>
+      </div>
+
+      <div class="readout">
+        <div class="row"><span class="k">node</span><span class="v">atlrwrks · the bench</span></div>
+        <div class="row"><span class="k">status</span><span class="v ox">building</span></div>
+        <div class="row"><span class="k">last commit</span><span class="v" id="cmt">— —</span></div>
+        <div class="row"><span class="k">stream</span><span class="v" id="stream">awaiting<span class="cursor">_</span></span></div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- ============ footer ticker ============ -->
+  <footer class="foot">
+    <div class="tag"><span class="led"></span>now building</div>
+    <div class="marquee">
+      <div class="track" id="track">
+        <span><b>works &amp; matter</b></span><span class="sep">✦</span>
+        <span>fabrication · industrial design · ar / xr · interactive 3d</span><span class="sep">✦</span>
+        <span><b>est. 2026</b> · atlanta, ga</span><span class="sep">✦</span>
+        <span>built sturdy · tested to spec · shipped</span><span class="sep">✦</span>
+        <span><b>no. 047</b> · holding page · rev a</span><span class="sep">✦</span>
+        <span>floor open soon · atlrwrks.studio</span><span class="sep">✦</span>
+      </div>
+    </div>
+    <div class="clock" id="clock"><b>—</b> · utc</div>
+  </footer>
+
+</div>
+
+<script>
+/* duplicate marquee content for seamless loop */
+(() => {
+  const t = document.getElementById('track');
+  t.innerHTML = t.innerHTML + t.innerHTML;
+})();
+
+/* UTC clock */
+const pad = n => String(n).padStart(2, '0');
+function tickClock() {
+  const n = new Date();
+  const s = `${pad(n.getUTCHours())}:${pad(n.getUTCMinutes())}:${pad(n.getUTCSeconds())}`;
+  document.getElementById('clock').innerHTML = `<b>${s}</b> · utc`;
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+/* frame counter on scope */
+let frameCount = 0;
+const frameEl = document.getElementById('frame');
+setInterval(() => {
+  frameCount = (frameCount + 1) % 10000;
+  frameEl.innerHTML = 'frm&nbsp;' + String(frameCount).padStart(4, '0');
+}, 90);
+
+/* last commit / stream readout */
+const commits = [
+  'wired · pwr bus 12v',
+  'milled · ø6 aluminium',
+  'tuned · sweep / 3.6s',
+  'set · oxide #C0353E',
+  'shimmed · panel 04',
+  'logged · spec 047',
+  'cured · 2h at 60°c',
+  'measured · ±0.05mm'
+];
+const streams = [
+  'awaiting',
+  'streaming',
+  'tracking',
+  'rendering',
+  'compiling',
+  'tooling',
+  'aligning'
+];
+let ci = 0, si = 0;
+const cmtEl = document.getElementById('cmt');
+const streamEl = document.getElementById('stream');
+setInterval(() => {
+  ci = (ci + 1) % commits.length;
+  cmtEl.textContent = commits[ci];
+}, 2400);
+setInterval(() => {
+  si = (si + 1) % streams.length;
+  streamEl.innerHTML = streams[si] + '<span class="cursor">_</span>';
+}, 1800);
+
+/* notify form */
+function handleNotify(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.btn');
+  const ipt = form.querySelector('.ipt');
+  btn.innerHTML = '✓ logged';
+  btn.style.background = 'var(--oxide)';
+  btn.style.borderColor = 'var(--oxide)';
+  ipt.disabled = true;
+  return false;
+}
+</script>
+</body>
+</html>
