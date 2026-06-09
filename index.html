@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>atlrwrks — in fabrication</title>
-<meta name="description" content="atlrwrks is being assembled — fabrication, industrial design, AR/XR, and interactive 3D. Sign up to be notified when the floor is open.">
+<meta name="description" content="atlrwrks is being assembled — fabrication, industrial design, AR/XR, and interactive 3D. Sign up to be notified when the bench is open.">
 <meta property="og:title" content="atlrwrks — in fabrication">
-<meta property="og:description" content="Works & matter. The site is being built. Sign up to know when the floor opens.">
+<meta property="og:description" content="Works & matter. The site is being built. Sign up to know when the bench opens.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://c4205m.github.io/atlrwrks/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="atlrwrks — in fabrication">
-<meta name="twitter:description" content="Works & matter. The site is being built. Sign up to know when the floor opens.">
+<meta name="twitter:description" content="Works & matter. The site is being built. Sign up to know when the bench opens.">
 <link rel="canonical" href="https://c4205m.github.io/atlrwrks/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +28,16 @@
   --mono:"JetBrains Mono",ui-monospace,monospace;
   --sans:"Archivo",system-ui,sans-serif;
   --mx:clamp(20px,4.5vw,64px);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --paper:#16140F;
+    --bone:#1E1C16;
+    --graphite:#9E9A90;
+    --ink:#F4F1EC;
+    --hair:#33302A;
+    --hair-ink:#4a463d;
+  }
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
@@ -62,7 +72,7 @@ header.top{
   background:var(--paper);
 }
 .wm{font-family:var(--sans);font-weight:600;letter-spacing:-0.03em;line-height:0.9;display:inline-flex;align-items:baseline;white-space:nowrap;color:var(--ink);font-size:18px}
-.wm .dot{display:inline-block;width:0.16em;height:0.16em;border-radius:50%;background:var(--oxide);margin-left:0.05em;flex:none;animation:pulse 1.6s ease-in-out infinite}
+.wm .dot{display:inline-block;width:0.16em;height:0.16em;border-radius:50%;background:var(--oxide);margin-left:0.05em;flex:none;animation:pulse 2.8s ease-in-out infinite}
 @keyframes pulse{
   0%,100%{transform:scale(1);box-shadow:0 0 0 0 color-mix(in srgb, var(--oxide) 60%, transparent)}
   50%{transform:scale(1.18);box-shadow:0 0 0 6px color-mix(in srgb, var(--oxide) 0%, transparent)}
@@ -82,7 +92,7 @@ header.top .crumb .sep{color:color-mix(in srgb, var(--graphite) 50%, transparent
 .status .led{
   width:7px;height:7px;border-radius:50%;background:var(--oxide);
   box-shadow:0 0 0 0 var(--oxide);
-  animation:led 1.2s ease-in-out infinite;
+  animation:led 2.2s ease-in-out infinite;
 }
 @keyframes led{
   0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--oxide) 70%, transparent)}
@@ -96,7 +106,7 @@ header.top .crumb .sep{color:color-mix(in srgb, var(--graphite) 50%, transparent
     var(--ink) 0 14px,
     var(--oxide) 14px 28px);
   background-size:39.6px 39.6px;
-  animation:scroll 1.4s linear infinite;
+  animation:scroll 2.4s linear infinite;
   border-bottom:1px solid var(--hair);
 }
 @keyframes scroll{
@@ -136,7 +146,7 @@ main{
 }
 .eyebrow .pill::before{
   content:"";width:6px;height:6px;border-radius:50%;background:var(--oxide);
-  animation:led 1.2s ease-in-out infinite;
+  animation:led 2.2s ease-in-out infinite;
 }
 .eyebrow .ln{flex:1;height:1px;background:var(--hair);max-width:160px}
 
@@ -180,13 +190,13 @@ h1.head .dot{
     var(--bone) 0 6px,
     color-mix(in srgb, var(--graphite) 16%, var(--bone)) 6px 12px);
   background-size:17px 17px;
-  animation:barber 1.2s linear infinite;
+  animation:barber 2.2s linear infinite;
 }
 @keyframes barber{from{background-position:0 0} to{background-position:17px 0}}
 .bar .scan{
   position:absolute;top:0;bottom:0;width:34%;
   background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--oxide) 85%, transparent) 50%, transparent);
-  animation:scan 2.4s cubic-bezier(.5,0,.5,1) infinite;
+  animation:scan 4s cubic-bezier(.5,0,.5,1) infinite;
 }
 @keyframes scan{
   0%{transform:translateX(-100%)}
@@ -275,7 +285,7 @@ h1.head .dot{
   position:absolute;left:0;right:0;height:2px;top:0;
   background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--oxide) 85%, transparent) 50%, transparent);
   box-shadow:0 0 12px color-mix(in srgb, var(--oxide) 60%, transparent);
-  animation:hscan 4.2s cubic-bezier(.5,0,.5,1) infinite;
+  animation:hscan 20s cubic-bezier(.5,0,.5,1) infinite;
   pointer-events:none;
 }
 @keyframes hscan{
@@ -297,7 +307,7 @@ h1.head .dot{
 }
 .scope .wm-big .dot{
   display:inline-block;width:0.16em;height:0.16em;border-radius:50%;background:var(--oxide);
-  margin-left:0.05em;animation:pulse 1.6s ease-in-out infinite;
+  margin-left:0.05em;animation:pulse 2.8s ease-in-out infinite;
 }
 .scope .underline{
   height:1px;width:100%;
@@ -307,7 +317,7 @@ h1.head .dot{
   font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8c887e;
   display:inline-flex;align-items:center;gap:10px;
 }
-.scope .subline .blob{width:4px;height:4px;border-radius:50%;background:var(--oxide);animation:led 1.2s ease-in-out infinite}
+.scope .subline .blob{width:4px;height:4px;border-radius:50%;background:var(--oxide);animation:led 2.2s ease-in-out infinite}
 
 /* readout panel */
 .readout{
@@ -341,7 +351,7 @@ footer.foot .tag{
   display:flex;align-items:center;gap:10px;
   white-space:nowrap;
 }
-footer.foot .tag .led{width:6px;height:6px;border-radius:50%;background:var(--oxide);animation:led 1.2s ease-in-out infinite}
+footer.foot .tag .led{width:6px;height:6px;border-radius:50%;background:var(--oxide);animation:led 2.2s ease-in-out infinite}
 
 .marquee{
   overflow:hidden;
@@ -433,12 +443,12 @@ footer.foot .clock b{color:var(--ink);font-weight:500}
         </div>
         <div class="cell">
           <h4>operator</h4>
-          <p>j. mercer</p>
+          <p>c4205m</p>
         </div>
       </div>
 
-      <form class="notify" onsubmit="return handleNotify(event)">
-        <input class="ipt" type="email" placeholder="your.address@domain" required>
+      <form class="notify" action="https://formspree.io/f/xgolgevd" method="POST" onsubmit="return handleNotify(event)">
+        <input class="ipt" type="email" name="email" placeholder="your.address@domain" required>
         <button class="btn" type="submit">notify me <span class="arr"></span></button>
       </form>
 
@@ -560,16 +570,32 @@ setInterval(() => {
 }, 1800);
 
 /* notify form */
-function handleNotify(e) {
+async function handleNotify(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('.btn');
   const ipt = form.querySelector('.ipt');
-  btn.innerHTML = '✓ logged';
-  btn.style.background = 'var(--oxide)';
-  btn.style.borderColor = 'var(--oxide)';
-  ipt.disabled = true;
-  return false;
+  btn.innerHTML = 'sending<span class="cursor">_</span>';
+  btn.disabled = true;
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    if (res.ok) {
+      btn.innerHTML = '✓ logged';
+      btn.style.background = 'var(--oxide)';
+      btn.style.borderColor = 'var(--oxide)';
+      ipt.disabled = true;
+    } else {
+      btn.innerHTML = 'try again';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.innerHTML = 'try again';
+    btn.disabled = false;
+  }
 }
 </script>
 </body>
