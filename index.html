@@ -8,11 +8,12 @@
 <meta property="og:title" content="atlrwrks — in fabrication">
 <meta property="og:description" content="Works & matter. The site is being built. Sign up to know when the bench opens.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://c4205m.github.io/atlrwrks/">
+<meta property="og:url" content="https://www.atlrwrks.com">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="atlrwrks — in fabrication">
 <meta name="twitter:description" content="Works & matter. The site is being built. Sign up to know when the bench opens.">
-<link rel="canonical" href="https://c4205m.github.io/atlrwrks/">
+<link rel="canonical" href="https://www.atlrwrks.com">
+<meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -25,6 +26,8 @@
   --oxide:#C0353E;
   --hair:#D6D0C5;
   --hair-ink:#33302A;
+  --scope-bg:#16140F;
+  --scope-fg:#D6D0C5;
   --mono:"JetBrains Mono",ui-monospace,monospace;
   --sans:"Archivo",system-ui,sans-serif;
   --mx:clamp(20px,4.5vw,64px);
@@ -40,6 +43,7 @@
   }
 }
 *{margin:0;padding:0;box-sizing:border-box}
+html{color-scheme:light dark}
 html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
 ::selection{background:var(--oxide);color:var(--paper)}
 
@@ -163,7 +167,7 @@ h1.head .word.w3 > span{animation-delay:.24s}
 h1.head .dot{
   display:inline-block;width:0.18em;height:0.18em;border-radius:50%;background:var(--oxide);
   flex:none;
-  margin-bottom:0.04em;
+  margin-bottom:0.1em;
   opacity:0;
   animation:rise-dot .6s cubic-bezier(.2,.7,.2,1) .55s forwards, pulse 1.6s ease-in-out 1.15s infinite;
 }
@@ -252,10 +256,11 @@ h1.head .dot{
 
 .scope{
   position:relative;flex:1;min-height:0;
-  background:var(--ink);
-  color:var(--paper);
+  background:var(--scope-bg);
+  color:var(--scope-fg);
   overflow:hidden;
   border:1px solid var(--hair-ink);
+  color-scheme:dark;
 }
 
 /* corner ticks */
@@ -301,7 +306,7 @@ h1.head .dot{
 }
 .scope .wm-big{
   font-family:var(--sans);font-weight:600;letter-spacing:-0.03em;line-height:0.9;
-  color:var(--paper);
+  color:var(--scope-fg);
   font-size:clamp(22px,3.2vw,38px);
   display:inline-flex;align-items:baseline;white-space:nowrap;
 }
@@ -421,7 +426,7 @@ footer.foot .clock b{color:var(--ink);font-weight:500}
       </h1>
 
       <p class="sub">
-        The site is being assembled. We're <b>milling the parts, wiring the systems, and pulling cable to the bench.</b> Back online when the work is sturdy enough to ship. Sign your name below and we'll send a single note the moment the floor is open.
+        Still in the shop. Milling parts, running cable. It ships when it holds. <b>Leave your address and we'll send one note when the floor opens</b> — nothing else.
       </p>
 
       <div class="strip">
@@ -447,7 +452,7 @@ footer.foot .clock b{color:var(--ink);font-weight:500}
         </div>
       </div>
 
-      <form class="notify" action="https://formspree.io/f/xgolgevd" method="POST" onsubmit="return handleNotify(event)">
+      <form class="notify" action="https://formspree.io/f/xgolgevd" method="POST" novalidate onsubmit="return handleNotify(event)">
         <input class="ipt" type="email" name="email" placeholder="your.address@domain" required>
         <button class="btn" type="submit">notify me <span class="arr"></span></button>
       </form>
@@ -463,8 +468,8 @@ footer.foot .clock b{color:var(--ink);font-weight:500}
         <span class="corner tr">no. 047<br>rev a</span>
 
         <svg class="bg" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
-          <line class="cross" x1="0" y1="200" x2="400" y2="200"/>
-          <line class="cross" x1="200" y1="0" x2="200" y2="400"/>
+          <line class="cross" x1="0" y1="200" x2="400" y2="200" opacity=".75"/>
+          <line class="cross" x1="200" y1="0" x2="200" y2="400" opacity=".75"/>
           <line class="cross" x1="40" y1="40" x2="360" y2="360" stroke-dasharray="2 8" opacity=".55"/>
           <line class="cross" x1="360" y1="40" x2="40" y2="360" stroke-dasharray="2 8" opacity=".55"/>
           <line class="cross" x1="0" y1="120" x2="400" y2="120" stroke-dasharray="1 6" opacity=".4"/>
@@ -474,9 +479,10 @@ footer.foot .clock b{color:var(--ink);font-weight:500}
         <div class="hscan"></div>
 
         <div class="markblock">
-          <span class="wm-big"><span>atlrwrks</span><span class="dot"></span></span>
           <div class="underline"></div>
+          <span class="wm-big"><span>atlrwrks</span><span class="dot"></span></span>
           <span class="subline"><span class="blob"></span>works &amp; matter</span>
+          <div class="underline"></div>
         </div>
 
         <span class="corner bl">lat&nbsp;33.7488n<br>lon&nbsp;84.3877w</span>
